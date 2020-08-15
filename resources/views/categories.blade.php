@@ -11,8 +11,7 @@
                     <tbody>
                     @foreach($categoriesIncome as $category)
                         <tr>
-{{--                            <td><a href="{{ route('category_update', $category->id) }}">{{ $category->name }}</a></td>--}}
-                            <td>{{ $category->name }}</td>
+                            <td><a href="{{ route('category_update', $category->id) }}">{{ $category->name }}</a></td>
                         </tr>
                     @endforeach
                     </tbody>
@@ -26,17 +25,14 @@
                     <tbody>
                     @foreach($categoriesOutcome as $category)
                         <tr>
-{{--                            <td><a href="{{ route('category_update', $category->id) }}">{{ $category->name }}</a></td>--}}
-                            <td>{{ $category->name }}</td>
-
+                            <td><a href="{{ route('category_update', $category->id) }}">{{ $category->name }}</a></td>
                         </tr>
                     @endforeach
-
                     </tbody>
                 </table>
             </div>
         </div>
-        </div>
+    </div>
 
     <div class="container">
         <div class="d-flex justify-content-center">

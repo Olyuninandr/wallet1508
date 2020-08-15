@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
     @if(!empty($category))
-        <form method="POST" action="{{ route('category_update_submit', $category->id)}}">
+        <form method="POST" action="{{route('category_update_submit', $category->id)}}">
             @else
                 <form method="POST" action="{{route('category_submit')}}">
                     @endif
@@ -56,11 +56,11 @@
                         <div class="btn-group" role="group" aria-label="Basic example">
                             <button type="submit" class="btn btn-primary">Добавить</button>
 
-{{--                            @if(!empty($category))--}}
-{{--                                <a href="{{ route('category_delete', $category->id) }}">--}}
-{{--                                    <button class="ml-5 btn btn-danger">Удалить</button>--}}
-{{--                                </a>--}}
-{{--                            @endif--}}
+                            {{--                            @if(!empty($category))--}}
+                            {{--                                <a href="{{ route('category_delete', $category->id) }}">--}}
+                            {{--                                    <button class="ml-5 btn btn-danger">Удалить</button>--}}
+                            {{--                                </a>--}}
+                            {{--                            @endif--}}
                         </div>
                 </form>
 

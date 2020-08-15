@@ -42,3 +42,7 @@ Route::get('/categories/add', function () {
 })->name('categories_add');
 Route::post('categories/submit', 'CategoryController@submitCategory')
     ->name('category_submit');
+Route::post('categories/submit/{id}', 'CategoryController@submitCategory')
+    ->name('category_update_submit');
+Route::get('/categories/update/{id}', 'CategoryController@getCategory')
+    ->name('category_update');

@@ -29,9 +29,17 @@ class CategoryController extends Controller
         return view('categories', compact('categoriesIncome', 'categoriesOutcome') );
     }
 
-    public function submitCategory(CategoriesRequest $request)
+    public function getCategory ($id)
     {
-        $category = new Category();
+        $category = Category::find($id);
+        return view('categories_form', compact('category'));
+    }
+
+    public function submitCategory(CategoriesRequest $request, $id=null)
+    {
+        if($id!=null) $category = Category::find($id);
+        else $category = new Category();
+
         $category->name = $request->input('name');
         $category->option = $request->input('option');
         $category->save();
