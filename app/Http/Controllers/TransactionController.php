@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Transaction;
-use Illuminate\Http\Request;
+use App\Http\Requests\TransactionRequest;
 
 
 class TransactionController extends Controller
@@ -24,4 +25,31 @@ class TransactionController extends Controller
 
         return view('transactions', compact('transactionsList' ));
     }
+
+    public function submitTransaction(TransactionRequest $request, $id=null)
+    {
+        if($id != null) $transaction=Transaction::find($id);
+        else $transaction = new Transaction();
+
+        $category_id=$request->input('category');
+        $category = Category::find($category_id);
+
+        $amount = $request->input('amount');
+        if($category->option == '-') $amount = (-1)*$amount;
+
+        $transaction->amount = $amount;
+        $transaction->category_id = $request->input('category');
+        $transaction->source = $request->input('source');
+        $transaction->date = $request->input('date');
+        $transaction->save();
+        return redirect()->route('transactions');
+    }
+
+    public function deleteTransaction($id)
+    {
+        Transaction::find($id)->delete();
+        return redirect()->route('transactions');
+    }
+
+
 }

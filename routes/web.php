@@ -21,7 +21,21 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/transactions', 'TransactionController@showAllTransactions')->name('transactions');
+Route::get('/transactions', 'TransactionController@showAllTransactions')
+    ->name('transactions');
 
-Route::get('/transaction/add', 'CategoryController@getCategoriesList')->name('transaction_add');
-Route::get('transaction_form')->name('transaction_form');
+Route::get('/transaction/add', 'CategoryController@getCategoriesList')
+    ->name('transaction_add');
+
+Route::post('/transaction/submit', 'TransactionController@submitTransaction')
+    ->name('transaction_submit');
+
+Route::post('/transaction/submit/{id}', 'TransactionController@submitTransaction')
+    ->name('transaction_update_submit');
+
+Route::get('/transaction/delete/{id}', 'TransactionController@deleteTransaction')
+    ->name('transaction_delete');
+
+
+Route::get('transaction/update/{id}', 'CategoryController@getCategoriesList')
+    ->name('transaction_update');

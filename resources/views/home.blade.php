@@ -23,12 +23,12 @@
                     <div class="card-body">
                         <div class="conteiner">
                             <div class="row justify-content-center">
-                                Total {{ $ballanceCard + $ballanceCash }}
+                                <h2>Total {{ $ballanceCard + $ballanceCash }} </h2>
                             </div>
                             <div class="row justify-content-center">
-                                Card-{{ $ballanceCard }}
+                               <h4> Card-{{ $ballanceCard }}
 
-                                Cash-{{ $ballanceCash }}
+                                Cash-{{ $ballanceCash }} </h4>
                             </div>
                         </div>
                     </div>

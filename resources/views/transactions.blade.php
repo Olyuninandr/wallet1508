@@ -11,6 +11,8 @@
                 <th scope="col">Категория</th>
                 <th scope="col">Дата</th>
                 <th scope="col">Комментарий</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
             </tr>
             </thead>
             <tbody>
@@ -23,6 +25,8 @@
                     <td scope="row">{{ $transaction->getCategoryName->name ?? '?' }}</td>
                     <td scope="row">{{$transaction->date}}</td>
                     <td scope="row">{{ $transaction->comment }}</td>
+                    <td scope="row"><a href="{{ route('transaction_update', $transaction->id) }}">Редактировать</a></td>
+                    <td scope="row"><a href="{{ route('transaction_delete', $transaction->id) }}">Удалить</a></td>
                 </tr>
             @endforeach
             </tbody>
