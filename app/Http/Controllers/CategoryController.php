@@ -19,4 +19,13 @@ class CategoryController extends Controller
 
         return view('transaction_form', compact('transaction','categoriesIncome', 'categoriesOutcome') );
     }
+
+    public function showAllCategories()
+    {
+
+        $categoriesIncome = Category::where('option', '=', '+')->get();
+        $categoriesOutcome = Category::where('option', '=', '-')->get();
+
+        return view('categories', compact('categoriesIncome', 'categoriesOutcome') );
+    }
 }
