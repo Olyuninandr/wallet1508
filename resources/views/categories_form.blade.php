@@ -3,7 +3,7 @@
     @if(!empty($category))
         <form method="POST" action="{{ route('category_update_submit', $category->id)}}">
             @else
-                <form method="POST" action="">
+                <form method="POST" action="{{route('category_submit')}}">
                     @endif
 
                     <?php $option = $category->option ?? ''?>
@@ -27,7 +27,7 @@
                                     <div class="form-check">
                                         <input class="form-check-input"
                                                type="radio"
-                                               name="operation"
+                                               name="option"
                                                id="income"
                                                value="+"
                                                @if($option == '+') checked @endif >
@@ -40,7 +40,7 @@
                                     <div class="form-check">
                                         <input class="form-check-input"
                                                type="radio"
-                                               name="operation"
+                                               name="option"
                                                id="consumption"
                                                value="-"
                                                @if($option == '-') checked @endif >

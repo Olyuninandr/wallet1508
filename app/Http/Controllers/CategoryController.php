@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Transaction;
+use App\Http\Requests\CategoriesRequest;
 
-use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
@@ -27,5 +27,14 @@ class CategoryController extends Controller
         $categoriesOutcome = Category::where('option', '=', '-')->get();
 
         return view('categories', compact('categoriesIncome', 'categoriesOutcome') );
+    }
+
+    public function submitCategory(CategoriesRequest $request)
+    {
+        $category = new Category();
+        $category->name = $request->input('name');
+        $category->option = $request->input('option');
+        $category->save();
+        return redirect()->route('categories');
     }
 }

@@ -40,3 +40,5 @@ Route::get('/categories', 'CategoryController@showAllCategories')
 Route::get('/categories/add', function () {
     return view('categories_form');
 })->name('categories_add');
+Route::post('categories/submit', 'CategoryController@submitCategory')
+    ->name('category_submit');
