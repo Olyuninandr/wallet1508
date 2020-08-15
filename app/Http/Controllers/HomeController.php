@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Transaction;
+
 
 class HomeController extends Controller
 {
@@ -23,6 +25,19 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $ballance = new Transaction();
+        $card = $ballance->where('source', '=', 'bank')->get();
+        $cash = $ballance->where('source', '=', 'cash')->get();
+
+        $ballanceCard=0;
+        foreach($card as $cardOperation){
+            $ballanceCard += $cardOperation->amount;
+        }
+
+        $ballanceCash=0;
+        foreach($cash as $cashOperation){
+            $ballanceCash += $cashOperation->amount;
+        }
+        return view('home', compact('ballanceCard', 'ballanceCash'));
     }
 }

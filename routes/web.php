@@ -22,3 +22,6 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/transactions', 'TransactionController@showAllTransactions')->name('transactions');
+
+Route::get('/transaction/add', 'CategoryController@getCategoriesList')->name('transaction_add');
+Route::get('transaction_form')->name('transaction_form');
