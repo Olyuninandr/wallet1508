@@ -54,13 +54,17 @@
                         </fieldset>
 
                         <div class="btn-group" role="group" aria-label="Basic example">
-                            <button type="submit" class="btn btn-primary">Добавить</button>
+                            <button type="submit" class="btn btn-primary">
+                                @if(!empty($category)) {{'Сохранить'}}
+                                    @else {{'Добавить'}}
+                                    @endif
+                            </button>
 
-                            {{--                            @if(!empty($category))--}}
-                            {{--                                <a href="{{ route('category_delete', $category->id) }}">--}}
-                            {{--                                    <button class="ml-5 btn btn-danger">Удалить</button>--}}
-                            {{--                                </a>--}}
-                            {{--                            @endif--}}
+{{--                            @if(!empty($category))--}}
+{{--                                <a href="{{ route('category_test') }}">--}}
+{{--                                    <button class="ml-5 btn btn-danger">Удалить</button>--}}
+{{--                                </a>--}}
+{{--                            @endif--}}
                         </div>
                 </form>
 

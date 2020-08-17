@@ -58,6 +58,7 @@
                                     <a class="dropdown-item" href="{{ route('home') }}">Главная</a>
                                     <a class="dropdown-item" href="{{ route('transactions') }}">Транзакции</a>
                                     <a class="dropdown-item" href="{{ route('categories') }}">Категории</a>
+                                    <a class="dropdown-item" href="{{ route('monthly_spent') }}">Месячные отчеты</a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                        document.getElementById('logout-form').submit();">

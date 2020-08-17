@@ -22,10 +22,8 @@ class CategoryController extends Controller
 
     public function showAllCategories()
     {
-
         $categoriesIncome = Category::where('option', '=', '+')->get();
         $categoriesOutcome = Category::where('option', '=', '-')->get();
-
         return view('categories', compact('categoriesIncome', 'categoriesOutcome') );
     }
 
@@ -45,4 +43,5 @@ class CategoryController extends Controller
         $category->save();
         return redirect()->route('categories');
     }
+
 }

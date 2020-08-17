@@ -24,31 +24,30 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function index($month=null)
     {
         $category = new Category();
         $ballance = new Transaction();
+
+        $month = date('m');
+//        dd($month);
+        $monthIncome = $ballance->whereMonth('date', $month)->where('amount','>','0')->get('amount')->sum('amount');
+        $monthConsumption = (-1)*($ballance->whereMonth('date', $month)->where('amount','<','0')->get('amount')->sum('amount'));
 
         $categoryList = $category->where('option', '=', '-')->get(['name', 'id'])->toArray();
 
         $spentTotal = [];
         foreach($categoryList as $category){
             $spentTotal[] = $ballance->where('category_id', '=', $category['id'])
-                ->get(['amount', 'category_id'])
+                ->get('amount')
                 ->sum('amount');
         }
-        $card = $ballance->where('source', '=', 'bank')->get();
-        $cash = $ballance->where('source', '=', 'cash')->get();
 
-        $ballanceCard=0;
-        foreach($card as $cardOperation){
-            $ballanceCard += $cardOperation->amount;
-        }
+        $balanceCard = $ballance->where('source', '=', 'bank')->get('amount')->sum('amount');
+        $balanceCash = $ballance->where('source', '=', 'cash')->get('amount')->sum('amount');
 
-        $ballanceCash=0;
-        foreach($cash as $cashOperation){
-            $ballanceCash += $cashOperation->amount;
-        }
-        return view('home', compact('spentTotal','categoryList', 'ballanceCard', 'ballanceCash'));
+
+        return view('home', compact('spentTotal','categoryList', 'balanceCard',
+            'balanceCash', 'monthIncome', 'monthConsumption'));
     }
 }

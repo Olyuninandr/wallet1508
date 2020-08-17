@@ -9,11 +9,11 @@
                     <div class="card-body">
                         <div class="conteiner">
                             <div class="row justify-content-center">
-                                <h2>Total {{ $ballanceCard + $ballanceCash }} </h2>
+                                <h2>Total {{ $balanceCard + $balanceCash }} </h2>
                             </div>
                             <div class="row justify-content-center">
-                                <h4> Card-{{ $ballanceCard }}
-                                    Cash-{{ $ballanceCash }} </h4>
+                                <h4> Card-{{ $balanceCard }}
+                                    Cash-{{ $balanceCash }} </h4>
                             </div>
                         </div>
                     </div>
