@@ -1,11 +1,12 @@
 @extends('layouts.app')
 @section('content')
-    @if ($transaction != null)
+    @if (isset($transaction))
         <form method="POST" action="{{ route('transaction_update_submit', $transaction->id)}}">
             @else
                 <form method="POST" action="{{ route('transaction_submit')}}">
                     @endif
                     <?php
+                    $date = $transaction->date ?? date('Y-m-d');
                     $source = $transaction->source ?? '';
                     $amount = $transaction->amount ?? '';
                     $category_id = $transaction->category_id ?? '';
@@ -20,8 +21,9 @@
                                        name="amount"
                                        class="form-control"
                                        id="amount"
-                                       value="@if($amount < 0) {{(-1)*$amount}} @endif"
-                                       placeholder="Сумма">
+                                       value="@if($amount < 0) {{(-1)*$amount}}
+                                              @else {{ $amount }}
+                                              @endif">
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="source">Ресурс</label>
@@ -55,11 +57,21 @@
                             <div class="form-group col-md-3">
                                 <label for="date">Дата</label>
                                 <input type="date" name="date" class="form-control" id="date"
-                                       value="{{$transaction->date ?? ''}}">
+                                       value="{{$date}}">
                             </div>
                         </div>
 
-                        <button type="submit" class="btn btn-success">Отправить</button>
+                        <div class="btn-group" role="group" aria-label="Basic example">
+                            <a href="{{route('transactions')}}">
+                                <button type="button" class="btn btn-secondary">Назад</button>
+                            </a>
+
+                            <button type="submit" class="ml-3 btn btn-primary">
+                            @if(isset($transaction)) Сохранить
+                                @else Отправить
+                                @endif
+                            </button>
+                        </div>
 
                 </form>
                 </div>

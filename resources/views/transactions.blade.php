@@ -17,7 +17,6 @@
             </thead>
             <tbody>
             @foreach($transactionsList as $transaction)
-
                 <tr>
                     <th scope="row">{{ $transaction->amount }}</th>
                     <td scope="row">{{ $transaction->option }}</td>
@@ -32,17 +31,32 @@
             </tbody>
         </table>
     </div>
-@guest
-    <div class="container">
-        <div class="d-flex justify-content-center">
-            <span>Log in to add or modify transactions</span>
-        </div>
+    <br>
+    <div class="d-flex justify-content-center">
+        @if($transactionsList->total() > $transactionsList->count())
+            <div class="row justify-content-center">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-body">
+                            {{ $transactionsList->links() }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @endif
     </div>
-@else
-    <div class="container">
-        <div class="d-flex justify-content-center">
-                    <a class="mr-3 btn btn-primary" href="{{ route('transaction_add') }}">Добавить операцию</a>
+    <br>
+    @guest
+        <div class="container">
+            <div class="d-flex justify-content-center">
+                <span>Log in to add or modify transactions</span>
+            </div>
         </div>
-    </div>
-@endguest
+    @else
+        <div class="container">
+            <div class="d-flex justify-content-center">
+                <a class="mr-3 btn btn-primary" href="{{ route('transaction_add') }}">Добавить операцию</a>
+            </div>
+        </div>
+    @endguest
 @endsection

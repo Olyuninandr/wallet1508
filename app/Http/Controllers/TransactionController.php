@@ -11,7 +11,7 @@ class TransactionController extends Controller
 {
     public function showAllTransactions()
     {
-        $transactionsList = (new Transaction)->orderBy('date', 'asc')->get();
+        $transactionsList = (new Transaction)->orderBy('date', 'asc')->paginate(4);
         foreach($transactionsList as $transaction){
             $transaction->date = \Carbon\Carbon::parse($transaction->date)->format('d M');
             if($transaction->amount < 0) {

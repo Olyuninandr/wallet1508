@@ -20,6 +20,12 @@ class CategoryController extends Controller
         return view('transaction_form', compact('transaction','categoriesIncome', 'categoriesOutcome') );
     }
 
+    public function deleteCategory($id)
+    {
+        Category::find($id)->delete();
+        return redirect()->route('categories');
+    }
+
     public function showAllCategories()
     {
         $categoriesIncome = Category::where('option', '=', '+')->get();
@@ -35,6 +41,7 @@ class CategoryController extends Controller
 
     public function submitCategory(CategoriesRequest $request, $id=null)
     {
+
         if($id!=null) $category = Category::find($id);
         else $category = new Category();
 
@@ -43,5 +50,7 @@ class CategoryController extends Controller
         $category->save();
         return redirect()->route('categories');
     }
+
+
 
 }

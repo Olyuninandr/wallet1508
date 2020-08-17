@@ -46,6 +46,8 @@ Route::post('categories/submit/{id}', 'CategoryController@submitCategory')
     ->name('category_update_submit');
 Route::get('/categories/update/{id}', 'CategoryController@getCategory')
     ->name('category_update');
+Route::get('/categories/delete/{id}', 'CategoryController@deleteCategory')
+    ->name('category_delete');
 
 Route::get('monthly_spent', 'MonthlyController@monthlyReport')->name('monthly_spent');
 Route::get('monthly_spent/{month}', 'MonthlyController@monthlyReport')->name('monthly_spent_next');
