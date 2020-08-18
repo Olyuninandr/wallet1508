@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Transaction;
+use Auth;
 use App\Http\Requests\TransactionRequest;
 
 
@@ -11,7 +12,11 @@ class TransactionController extends Controller
 {
     public function showAllTransactions()
     {
-        $transactionsList = (new Transaction)->orderBy('date', 'asc')->paginate(4);
+        $user_id = Auth::user()->id;
+        $transactionsList = (new Transaction)
+            ->where('user_id', $user_id)
+            ->orderBy('date', 'asc')
+            ->paginate(4);
         foreach($transactionsList as $transaction){
             $transaction->date = \Carbon\Carbon::parse($transaction->date)->format('d M');
             if($transaction->amount < 0) {
@@ -39,6 +44,7 @@ class TransactionController extends Controller
 
         $transaction->amount = $amount;
         $transaction->category_id = $request->input('category');
+        $transaction->user_id = Auth::user()->id;
         $transaction->source = $request->input('source');
         $transaction->date = $request->input('date');
         $transaction->save();

@@ -24,7 +24,7 @@
                     <td scope="row">{{ $transaction->getCategoryName->name ?? '?' }}</td>
                     <td scope="row">{{$transaction->date}}</td>
                     <td scope="row">{{ $transaction->comment }}</td>
-                    <td scope="row"><a href="{{ route('transaction_update', $transaction->id) }}">Редактировать</a></td>
+                    <td scope="row"><a href="{{ route('transaction_update', $transaction->id) }}">Подробнее</a></td>
                     <td scope="row"><a href="{{ route('transaction_delete', $transaction->id) }}">Удалить</a></td>
                 </tr>
             @endforeach
@@ -46,17 +46,9 @@
         @endif
     </div>
     <br>
-    @guest
-        <div class="container">
-            <div class="d-flex justify-content-center">
-                <span>Log in to add or modify transactions</span>
-            </div>
-        </div>
-    @else
         <div class="container">
             <div class="d-flex justify-content-center">
                 <a class="mr-3 btn btn-primary" href="{{ route('transaction_add') }}">Добавить операцию</a>
             </div>
         </div>
-    @endguest
 @endsection

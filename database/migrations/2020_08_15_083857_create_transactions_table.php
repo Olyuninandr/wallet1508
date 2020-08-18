@@ -18,9 +18,9 @@ class CreateTransactionsTable extends Migration
             $table->integer('amount');
             $table->string('source');
             $table->integer('category_id');
+            $table->integer('user_id');
             $table->date('date');
             $table->text('comment')->nullable();
-            $table->
             $table->timestamps();
         });
     }

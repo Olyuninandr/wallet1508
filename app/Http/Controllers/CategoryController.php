@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Auth;
 use App\Models\Category;
 use App\Models\Transaction;
 use App\Http\Requests\CategoriesRequest;
@@ -13,9 +14,12 @@ class CategoryController extends Controller
     {
         if($id != 'null')
             $transaction = Transaction::find($id);
+        $user_id = Auth::user()->id;
 
-        $categoriesIncome = Category::where('option', '=', '+')->get();
-        $categoriesOutcome = Category::where('option', '=', '-')->get();
+        $categoriesIncome = Category::where('user_id', $user_id)
+            ->where('option', '=', '+')->get();
+        $categoriesOutcome = Category::where('user_id', $user_id)
+            ->where('option', '=', '-')->get();
 
         return view('transaction_form', compact('transaction','categoriesIncome', 'categoriesOutcome') );
     }
@@ -28,8 +32,11 @@ class CategoryController extends Controller
 
     public function showAllCategories()
     {
-        $categoriesIncome = Category::where('option', '=', '+')->get();
-        $categoriesOutcome = Category::where('option', '=', '-')->get();
+        $user_id =Auth::user()->id;
+        $categoriesIncome = Category::where('user_id', $user_id)
+            ->where('option', '=', '+')->get();
+        $categoriesOutcome = Category::where('user_id', $user_id)
+            ->where('option', '=', '-')->get();
         return view('categories', compact('categoriesIncome', 'categoriesOutcome') );
     }
 
@@ -47,6 +54,7 @@ class CategoryController extends Controller
 
         $category->name = $request->input('name');
         $category->option = $request->input('option');
+        $category->user_id =Auth::user()->id;
         $category->save();
         return redirect()->route('categories');
     }
